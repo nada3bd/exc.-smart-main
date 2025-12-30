@@ -1,0 +1,252 @@
+<!-- FILENAME: pages/events.html -->
+<div class="page-transition">
+    <div class="relative bg-slate-900 py-20 text-center overflow-hidden">
+        <canvas id="events-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+        <div class="relative z-10">
+            <h1 class="text-4xl font-bold text-white mb-4">Events</h1>
+        </div>
+    </div>
+    <div class="relative bg-slate-50 dark:bg-dark-bg">
+        <canvas id="events-content-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 z-10">
+        <style>
+            @keyframes float {
+                0%, 100% { transform: translateY(0px) rotate(0deg); }
+                50% { transform: translateY(-10px) rotate(2deg); }
+            }
+            @keyframes shimmer {
+                0% { background-position: -1000px 0; }
+                100% { background-position: 1000px 0; }
+            }
+            .event-card {
+                position: relative;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                background: rgba(255, 255, 255, 0.7);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                overflow: visible;
+            }
+            .dark .event-card {
+                background: rgba(30, 41, 59, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .event-card:hover {
+                transform: translateY(-12px) rotate(1deg) scale(1.02);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            }
+            .event-card:nth-child(2):hover {
+                transform: translateY(-12px) rotate(-1deg) scale(1.02);
+            }
+            .event-card:nth-child(3):hover {
+                transform: translateY(-12px) rotate(0.5deg) scale(1.02);
+            }
+            .event-image-wrapper {
+                position: relative;
+                clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+                overflow: hidden;
+            }
+            .event-card:nth-child(2) .event-image-wrapper {
+                clip-path: polygon(0 0, 100% 0, 100% 90%, 0 85%);
+            }
+            .event-card:nth-child(3) .event-image-wrapper {
+                clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);
+            }
+            .event-image-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(13, 148, 136, 0.3) 100%);
+                opacity: 0;
+                transition: opacity 0.4s ease;
+            }
+            .event-card:hover .event-image-overlay {
+                opacity: 1;
+            }
+            .event-badge {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #6366f1 0%, #0d9488 100%);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 0.75rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+                z-index: 10;
+                animation: float 3s ease-in-out infinite;
+            }
+            .event-card:nth-child(2) .event-badge {
+                background: linear-gradient(135deg, #ec4899 0%, #f59e0b 100%);
+                box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+                animation-delay: 0.5s;
+            }
+            .event-card:nth-child(3) .event-badge {
+                background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+                box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+                animation-delay: 1s;
+            }
+            .event-content {
+                position: relative;
+                padding: 2rem;
+                background: transparent;
+            }
+            .event-title {
+                background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                font-size: 1.75rem;
+                font-weight: 800;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+                position: relative;
+            }
+            .dark .event-title {
+                background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .event-title::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 60px;
+                height: 4px;
+                background: linear-gradient(90deg, #6366f1 0%, #0d9488 100%);
+                border-radius: 2px;
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.4s ease;
+            }
+            .event-card:hover .event-title::after {
+                transform: scaleX(1);
+            }
+            .event-description {
+                color: #475569;
+                line-height: 1.8;
+                position: relative;
+                padding-left: 1.5rem;
+            }
+            .dark .event-description {
+                color: #cbd5e1;
+            }
+            .event-description::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background: linear-gradient(180deg, #6366f1 0%, #0d9488 100%);
+                border-radius: 2px;
+            }
+            .event-card:nth-child(2) .event-description::before {
+                background: linear-gradient(180deg, #ec4899 0%, #f59e0b 100%);
+            }
+            .event-card:nth-child(3) .event-description::before {
+                background: linear-gradient(180deg, #8b5cf6 0%, #06b6d4 100%);
+            }
+            .event-glow {
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+                opacity: 0;
+                transition: opacity 0.4s ease;
+                pointer-events: none;
+            }
+            .event-card:hover .event-glow {
+                opacity: 1;
+            }
+            .event-card:hover .event-image-wrapper img {
+                transform: scale(1.15);
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const cards = document.querySelectorAll('.event-card');
+                cards.forEach(card => {
+                    card.addEventListener('mouseenter', function() {
+                        this.style.zIndex = '10';
+                    });
+                    card.addEventListener('mouseleave', function() {
+                        this.style.zIndex = '1';
+                    });
+                });
+            });
+        </script>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
+            <!-- Event 1 -->
+            <div class="event-card rounded-3xl">
+                <div class="event-glow"></div>
+                <div class="event-image-wrapper h-72 relative">
+                    <img 
+                        src="/assets/event1.png" 
+                        alt="Medical Responsibility" 
+                        class="w-full h-full object-cover transition-transform duration-700 ease-out"
+                        style="transform: scale(1.1);"
+                    >
+                    <div class="event-image-overlay"></div>
+                </div>
+                <div class="event-content">
+                    <h3 class="event-title">Medical Responsibility</h3>
+                    <p class="event-description">
+                        As part of our participation in an international conference on medical responsibility in healthcare services, Excellence smart solutions proudly showcased Saleem Care, our flagship product. 
+                        The presentation emphasized our commitment to responsible medical practice and demonstrated how Saleem Care contributes to enhancing quality, accountability, and trust in the delivery of medical services.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card rounded-3xl">
+                <div class="event-glow"></div>
+                <div class="event-image-wrapper h-72 relative">
+                    <img 
+                        src="/assets/event2.png" 
+                        alt="C8 Cybersecurity Exhibition" 
+                        class="w-full h-full object-cover transition-transform duration-700 ease-out"
+                        style="transform: scale(1.1);"
+                    >
+                    <div class="event-image-overlay"></div>
+                </div>
+                <div class="event-content">
+                    <h3 class="event-title">C8 Cybersecurity Exhibition</h3>
+                    <p class="event-description">
+                        Excellence participated in the C8 Cybersecurity Exhibition, marking an important step in strengthening its presence at the intersection of technology, security, and innovation. During the exhibition, the company showcased its advanced digital solutions and emphasized the critical role of cybersecurity in protecting sensitive data within modern AI-driven systems, particularly in healthcare and smart technologies. The event provided a valuable platform to engage with experts, decision-makers, and technology leaders, exchange insights on emerging cyber threats, and highlight Excellence Company’s commitment to building secure, reliable, and future-ready technological solutions.s infrastructure. Learn best practices, common pitfalls, and optimization strategies from our expert team.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card rounded-3xl">
+                <div class="event-glow"></div>
+                <div class="event-image-wrapper h-72 relative">
+                    <img 
+                        src="/assets/event3.png" 
+                        alt="Medical Responsibility" 
+                        class="w-full h-full object-cover transition-transform duration-700 ease-out"
+                        style="transform: scale(1.1);"
+                    >
+                </div>
+                <div class="event-content">
+                    <h3 class="event-title">Medical Responsibility</h3>
+                    <p class="event-description">
+                        Excellence Smart Solutions participated in a specialized presentation highlighting the advanced, AI-powered medical technology that underpins the Saleem Care system. The presentation was delivered to an internationally recognized medical group distinguished by its exceptionally high levels of medical knowledge and scientific expertise. Through this engagement, Excellence Smart Solutions demonstrated how Saleem Care leverages artificial intelligence to support evidence-based medical decision-making, enhance clinical accuracy, and align with global standards in medical science and innovation.
+                    </p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
