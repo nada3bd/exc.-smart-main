@@ -110,3 +110,27 @@ textarea:focus {
 .dark .robot-illustration svg {
     filter: brightness(1.02);
 }
+
+/* Ensure card body text is white in dark mode */
+.dark .card p,
+.dark .card .text-slate-500,
+.dark .card .text-slate-600,
+.dark .card .text-slate-500 * {
+    color: var(--color-text-primary) !important;
+}
+
+/* Ensure contact form inputs keep visible borders and readable text in dark mode */
+.dark .contact-form input,
+.dark .contact-form textarea,
+.dark .contact-form select {
+    border-color: var(--color-border) !important;
+    color: var(--color-text-primary) !important;
+    background-color: var(--color-bg-card) !important;
+}
+
+/* Ensure product card group items (cards without the `card` class) show readable text in dark mode */
+.dark .card-grid .group p,
+.dark .card-grid .group .text-slate-500,
+.dark .card-grid .group .text-slate-600 {
+    color: var(--color-text-primary) !important;
+}

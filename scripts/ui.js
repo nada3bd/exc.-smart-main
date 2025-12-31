@@ -361,16 +361,41 @@ export function initThemeAfterLoad() {
     return;
   }
 
-  // Set initial theme based on localStorage or system preference
-  if (
-    localStorage.getItem("theme") === "dark" ||
-    (!("theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
+  // Use saved preference or system preference
+  const saved = localStorage.getItem("theme");
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+  if (saved === "dark" || (!saved && mq.matches)) {
     html.classList.add("dark");
     updateThemeIcon(true);
   } else {
+    html.classList.remove("dark");
     updateThemeIcon(false);
+  }
+
+  // If user hasn't explicitly chosen a theme, follow OS changes
+  if (!saved) {
+    try {
+      mq.addEventListener('change', (e) => {
+        if (e.matches) {
+          html.classList.add('dark');
+          updateThemeIcon(true);
+        } else {
+          html.classList.remove('dark');
+          updateThemeIcon(false);
+        }
+      });
+    } catch (err) {
+      mq.addListener((e) => {
+        if (e.matches) {
+          html.classList.add('dark');
+          updateThemeIcon(true);
+        } else {
+          html.classList.remove('dark');
+          updateThemeIcon(false);
+        }
+      });
+    }
   }
 
   toggleBtn.addEventListener("click", () => {

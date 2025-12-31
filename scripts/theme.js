@@ -5,11 +5,42 @@ export function initTheme() {
     const icon = document.getElementById('theme-icon');
     const html = document.documentElement;
 
-    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    const saved = localStorage.getItem('theme');
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Apply saved preference, or default to system preference
+    if (saved === 'dark' || (!saved && mq.matches)) {
         html.classList.add('dark');
         updateIcon(true);
     } else {
+        html.classList.remove('dark');
         updateIcon(false);
+    }
+
+    // If user hasn't explicitly chosen a theme, follow OS changes
+    if (!saved) {
+        try {
+            mq.addEventListener('change', (e) => {
+                if (e.matches) {
+                    html.classList.add('dark');
+                    updateIcon(true);
+                } else {
+                    html.classList.remove('dark');
+                    updateIcon(false);
+                }
+            });
+        } catch (err) {
+            // Fallback for older browsers
+            mq.addListener((e) => {
+                if (e.matches) {
+                    html.classList.add('dark');
+                    updateIcon(true);
+                } else {
+                    html.classList.remove('dark');
+                    updateIcon(false);
+                }
+            });
+        }
     }
 
     toggleBtn.addEventListener('click', () => {

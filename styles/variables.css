@@ -42,7 +42,8 @@
     --color-accent: #71c4ef;
     --color-accent-hover: #5bb0e0;
     
-    --color-border: #313d44;
+    /* Make borders slightly lighter than the card bg so they remain visible */
+    --color-border: #475569;
     --color-border-light: #3b3c3d;
     
     /* Legacy support */
