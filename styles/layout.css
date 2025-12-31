@@ -4,6 +4,9 @@
     transition: opacity 0.3s ease-out;
     background-color: var(--color-bg-primary);
     color: var(--color-text-primary);
+    /* مهم جداً: نسمح بارتفاع تلقائي ولا نملأ الشاشة بالقوة إلا عند الضرورة */
+    min-height: auto;
+    height: auto;
 }
 
 /* Navbar */
@@ -26,6 +29,9 @@ footer {
     background-color: var(--color-bg-secondary);
     color: var(--color-text-secondary);
     border-top: 1px solid var(--color-border);
+    /* تأكيد عدم وجود مسافات إضافية */
+    margin-top: 0;
+    padding-top: 0;
 }
 
 .dark footer {
@@ -60,16 +66,22 @@ footer {
     background: var(--color-accent);
 }
 
-/* Events page - remove extra spacing before footer */
-/* Override min-h-screen on app-container when events page is loaded */
+/* ========================================== */
+/* ✅ إصلاح نهائي لمسافة الفوتر ومشاكل الارتفاع في صفحة Events */
+/* ========================================== */
+
+/* عندما تكون الصفحة الحالية هي Events */
 #app-container:has(.events-page) {
     min-height: auto !important;
     height: auto !important;
+    display: block !important;
 }
 
+/* إزالة أي هوامش أو حواف سفلية */
 .events-page {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
+    display: block !important;
 }
 
 .events-page > div:last-child {
@@ -77,8 +89,10 @@ footer {
     margin-bottom: 0 !important;
 }
 
+/* ضمان أن الحاوية الرمادية للصور لا تضيف مساحة غير ضرورية */
 .events-page .relative.bg-slate-50,
-.events-page .relative.bg-slate-50.dark\:bg-dark-bg {
+.events-page .relative.dark\:bg-dark-bg {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
+    overflow: hidden; /* يمنع Canvas من إضافة Scrollbar أفقي زائد */
 }

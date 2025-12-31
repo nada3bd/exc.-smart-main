@@ -31,11 +31,31 @@ export const teamMembers = [
             linkedin: "#",
             email: "#"
         }
+    },  
+     {
+        id: 7,
+        name: "Noor Alnujoom",
+        role: "Data Scientist & AI Engineer",
+        image: "/assets/noor.png",
+        social: {
+            linkedin: "#",
+            email: "#"
+        }
+    },
+        {
+        id: 6,
+        name: "Eman Njoum",
+        role: "Data Scientist & AI Engineer",
+        image: "/assets/eman.png",
+        social: {
+            linkedin: "#",
+            email: "#"
+        }
     },
     {
         id: 4,
         name: "Nada Abo Al-Halawa",
-        role: "AI Engineer",
+        role: "Data Scientist & AI Engineer",
         image: "/assets/nada.png",
         social: {
             linkedin: "#",
@@ -52,25 +72,7 @@ export const teamMembers = [
             email: "#"
         }
     },
-    {
-        id: 6,
-        name: "Eman Alnujoom",
-        role: "AI Engineer",
-        image: "/assets/eman.png",
-        social: {
-            linkedin: "#",
-            email: "#"
-        }
-    },
-    {
-        id: 7,
-        name: "Noor Alnujoom",
-        role: "AI Engineer",
-        image: "/assets/noor.png",
-        social: {
-            linkedin: "#",
-            email: "#"
-        }
-    }
+
+
 ];
 
