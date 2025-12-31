@@ -59,3 +59,26 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--color-accent);
 }
+
+/* Events page - remove extra spacing before footer */
+/* Override min-h-screen on app-container when events page is loaded */
+#app-container:has(.events-page) {
+    min-height: auto !important;
+    height: auto !important;
+}
+
+.events-page {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.events-page > div:last-child {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.events-page .relative.bg-slate-50,
+.events-page .relative.bg-slate-50.dark\:bg-dark-bg {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+}

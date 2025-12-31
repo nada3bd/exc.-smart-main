@@ -42,12 +42,21 @@ export function initRouter(startCanvasCallback, stopCanvasCallback, startEventsC
         if (pageId === "home") {
           stopEventsCanvasCallback();
           startCanvasCallback();
+          // Reset min-height for home page
+          container.style.minHeight = '';
+          container.style.height = '';
         } else if (pageId === "events") {
           stopCanvasCallback();
           startEventsCanvasCallback();
+          // Remove min-height constraint for events page to prevent extra white space
+          container.style.minHeight = 'auto';
+          container.style.height = 'auto';
         } else {
           stopCanvasCallback();
           stopEventsCanvasCallback();
+          // Reset min-height for other pages
+          container.style.minHeight = '';
+          container.style.height = '';
         }
 
         // Fade in
