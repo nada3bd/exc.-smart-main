@@ -1,0 +1,75 @@
+<!-- FILENAME: pages/team.html -->
+<div class="page-transition team-page">
+    <!-- AI Graphics - Animated Female Robot -->
+    <div class="ai-robot-container">
+        <svg class="ai-robot-illustration" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Head -->
+            <g class="robot-head">
+                <ellipse cx="100" cy="60" rx="35" ry="40" fill="#71c4ef" opacity="0.9" class="robot-head-base"/>
+                <ellipse cx="100" cy="60" rx="30" ry="35" fill="#00668c" opacity="0.7"/>
+                <!-- Eyes -->
+                <circle cx="90" cy="55" r="4" fill="#fffefb" class="robot-eye-left"/>
+                <circle cx="110" cy="55" r="4" fill="#fffefb" class="robot-eye-right"/>
+                <!-- Hair/Headpiece -->
+                <path d="M 70 45 Q 100 30 130 45 Q 130 25 100 20 Q 70 25 70 45" fill="#71c4ef" opacity="0.8" class="robot-hair"/>
+                <!-- Antenna -->
+                <line x1="100" y1="20" x2="100" y2="5" stroke="#71c4ef" stroke-width="2" class="robot-antenna"/>
+                <circle cx="100" cy="5" r="3" fill="#71c4ef" class="robot-antenna-tip"/>
+            </g>
+            
+            <!-- Body -->
+            <g class="robot-body">
+                <rect x="70" y="100" width="60" height="80" rx="8" fill="#71c4ef" opacity="0.9" class="robot-torso"/>
+                <rect x="75" y="105" width="50" height="70" rx="5" fill="#00668c" opacity="0.7"/>
+                <!-- Chest Panel -->
+                <circle cx="100" cy="140" r="12" fill="#71c4ef" opacity="0.6" class="robot-chest-panel"/>
+                <circle cx="100" cy="140" r="8" fill="#fffefb" opacity="0.8" class="robot-chest-core"/>
+            </g>
+            
+            <!-- Arms -->
+            <g class="robot-arms">
+                <!-- Left Arm -->
+                <rect x="50" y="110" width="20" height="50" rx="10" fill="#71c4ef" opacity="0.9" class="robot-arm-left"/>
+                <circle cx="60" cy="165" r="8" fill="#00668c" class="robot-hand-left"/>
+                <!-- Right Arm -->
+                <rect x="130" y="110" width="20" height="50" rx="10" fill="#71c4ef" opacity="0.9" class="robot-arm-right"/>
+                <circle cx="140" cy="165" r="8" fill="#00668c" class="robot-hand-right"/>
+            </g>
+            
+            <!-- Legs -->
+            <g class="robot-legs">
+                <!-- Left Leg -->
+                <rect x="80" y="180" width="25" height="60" rx="12" fill="#71c4ef" opacity="0.9" class="robot-leg-left"/>
+                <ellipse cx="92.5" cy="245" rx="12" ry="8" fill="#00668c" class="robot-foot-left"/>
+                <!-- Right Leg -->
+                <rect x="95" y="180" width="25" height="60" rx="12" fill="#71c4ef" opacity="0.9" class="robot-leg-right"/>
+                <ellipse cx="107.5" cy="245" rx="12" ry="8" fill="#00668c" class="robot-foot-right"/>
+            </g>
+            
+            <!-- Decorative Elements -->
+            <g class="robot-decorations">
+                <circle cx="85" cy="120" r="2" fill="#71c4ef" opacity="0.6" class="robot-dot-1"/>
+                <circle cx="115" cy="120" r="2" fill="#71c4ef" opacity="0.6" class="robot-dot-2"/>
+                <circle cx="85" cy="160" r="2" fill="#71c4ef" opacity="0.6" class="robot-dot-3"/>
+                <circle cx="115" cy="160" r="2" fill="#71c4ef" opacity="0.6" class="robot-dot-4"/>
+            </g>
+        </svg>
+    </div>
+    
+    <!-- Floating AI Particles -->
+    <div class="ai-particles">
+        <div class="ai-particle particle-1"></div>
+        <div class="ai-particle particle-2"></div>
+        <div class="ai-particle particle-3"></div>
+        <div class="ai-particle particle-4"></div>
+        <div class="ai-particle particle-5"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 relative z-10 container-padding">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 dark:text-white">Meet Our Team</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 team-grid">
+            <!-- Team cards will be dynamically rendered here -->
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,94 @@
+/* FILENAME: styles/variables.css */
+/* Color System - Day and Night Modes */
+
+:root {
+    /* Light Mode Colors */
+    --color-bg-primary: #fffefb;
+    --color-bg-secondary: #f5f4f1;
+    --color-bg-card: #d4eaf7;
+    --color-bg-accent: #b6ccd8;
+    
+    --color-text-primary: #3b3c3d;
+    --color-text-secondary: #3b3c3d;
+    --color-text-muted: #3b3c3d;
+    
+    --color-primary: #00668c;
+    --color-primary-hover: #005a7a;
+    --color-accent: #71c4ef;
+    --color-accent-hover: #5bb0e0;
+    
+    --color-border: #cccbc8;
+    --color-border-light: #b6ccd8;
+    
+    /* Legacy support - mapped to new colors */
+    --ai-500: #71c4ef;
+    --ai-600: #00668c;
+    --sky-accent: #71c4ef;
+}
+
+.dark {
+    /* Dark Mode Colors */
+    --color-bg-primary: #1d1c1c;
+    --color-bg-secondary: #313d44;
+    --color-bg-card: #313d44;
+    --color-bg-accent: #3b3c3d;
+    
+    --color-text-primary: #fffefb;
+    --color-text-secondary: #f5f4f1;
+    --color-text-muted: #cccbc8;
+    
+    --color-primary: #71c4ef;
+    --color-primary-hover: #5bb0e0;
+    --color-accent: #71c4ef;
+    --color-accent-hover: #5bb0e0;
+    
+    --color-border: #313d44;
+    --color-border-light: #3b3c3d;
+    
+    /* Legacy support */
+    --ai-500: #71c4ef;
+    --ai-600: #71c4ef;
+    --sky-accent: #71c4ef;
+}
+
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, var(--color-primary), var(--color-accent));
+}
+
+/* Utility classes for new color system */
+.bg-primary-color {
+    background-color: var(--color-bg-primary);
+}
+
+.bg-secondary-color {
+    background-color: var(--color-bg-secondary);
+}
+
+.bg-card-color {
+    background-color: var(--color-bg-card);
+}
+
+.text-primary-color {
+    color: var(--color-text-primary);
+}
+
+.text-secondary-color {
+    color: var(--color-text-secondary);
+}
+
+.text-muted-color {
+    color: var(--color-text-muted);
+}
+
+.border-color {
+    border-color: var(--color-border);
+}

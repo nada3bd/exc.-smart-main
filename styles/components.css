@@ -1,0 +1,112 @@
+/* FILENAME: styles/components.css */
+
+/* Cards */
+.hover-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 102, 140, 0.15), 0 8px 10px -6px rgba(0, 102, 140, 0.1);
+}
+
+/* Loader */
+#loader {
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg-primary);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s;
+}
+
+.dark #loader {
+    background: var(--color-bg-primary);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(0, 102, 140, 0.2);
+}
+
+.dark input,
+.dark textarea {
+    background-color: var(--color-bg-card);
+    border-color: var(--color-border);
+    color: var(--color-text-primary);
+}
+
+/* Robot illustration styles */
+.robot-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.robot-illustration svg {
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+    transform-origin: center;
+    animation: robot-bob 4s ease-in-out infinite;
+    color: var(--color-accent);
+}
+
+.robot-illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.robot-eye {
+    transform-origin: center;
+    animation: robot-blink 4s infinite;
+}
+
+.robot-ant {
+    transform-origin: center;
+}
+
+@keyframes robot-bob {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes robot-blink {
+    0%, 92%, 100% {
+        transform: scaleY(1);
+    }
+    94% {
+        transform: scaleY(0.12);
+    }
+}
+
+.robot-illustration svg:hover {
+    transform: scale(1.02);
+    transition: transform 220ms ease;
+}
+
+.dark .robot-illustration svg {
+    filter: brightness(1.02);
+}

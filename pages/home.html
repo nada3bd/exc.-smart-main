@@ -1,0 +1,67 @@
+<!-- FILENAME: pages/home.html -->
+<div class="page-transition">
+    <div class="relative bg-primary-color dark:bg-dark-bg overflow-hidden min-h-[90vh] sm:min-h-[85vh] flex items-center hero-section">
+        <canvas id="hero-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"></canvas>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
+            <div class="text-center lg:text-left">
+                <span class="inline-block py-1 px-3 rounded-full bg-ai-50 dark:bg-ai-900/30 text-ai-600 dark:text-ai-400 text-xs sm:text-sm font-semibold mb-4 sm:mb-6 tracking-wide">
+                    Next Gen Intelligence
+                </span>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary-color dark:text-white mb-4 sm:mb-6 leading-tight hero-title">
+                    Empowering Future with <br class="hidden sm:block">
+                    <span class="text-gradient">Artificial Intelligence</span>
+                </h1>
+                <p class="text-base sm:text-lg text-muted-color dark:text-secondary-color mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    We build scalable, ethical, and powerful AI solutions that transform industries. Experience synergy of human creativity and machine intelligence.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start hero-buttons">
+                    <button onclick="router.navigate('services')" class="w-full sm:w-auto px-6 sm:px-8 py-3 rounded-lg bg-ai-600 text-white text-sm sm:text-base font-medium hover:bg-ai-700 transition-all shadow-lg shadow-ai-500/30 button-responsive">
+                        Explore Solutions
+                    </button>
+                    <button onclick="router.navigate('about')" class="w-full sm:w-auto px-6 sm:px-8 py-3 rounded-lg bg-primary-color dark:bg-dark-card text-primary-color dark:text-secondary-color border border-color dark:border-color font-medium hover:bg-secondary-color dark:hover:bg-dark-accent transition-all button-responsive">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+            <div class="relative hidden lg:block hero-image">
+                <div class="relative w-full h-80 lg:h-96 animate-float">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop" alt="AI Visualization" class="rounded-2xl shadow-2xl shadow-ai-500/20 object-cover w-full h-full responsive-image">
+                    <div class="absolute -bottom-4 -left-4 lg:-bottom-6 lg:-left-6 bg-primary-color dark:bg-dark-card p-3 lg:p-4 rounded-xl shadow-lg flex items-center gap-2 lg:gap-3 animate-bounce hero-badge" style="animation-duration: 3s;">
+                        <div class="bg-card-color p-2 rounded-full text-ai-600"><i class="fa-solid fa-check text-xs lg:text-sm"></i></div>
+                        <div><p class="text-xs text-muted-color">Accuracy</p><p class="font-bold text-xs lg:text-sm text-primary-color dark:text-white">95.00%</p></div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 bg-primary-color dark:bg-dark-card p-3 lg:p-4 rounded-xl shadow-lg flex items-center gap-2 lg:gap-3 animate-bounce hero-badge" style="animation-duration: 4s;">
+                        <div class="bg-card-color dark:bg-dark-accent/30 p-2 rounded-full text-ai-400 dark:text-ai-400"><i class="fa-solid fa-robot text-xs lg:text-sm"></i></div>
+                        <div><p class="text-xs text-muted-color">Projects</p><p class="font-bold text-xs lg:text-sm text-primary-color dark:text-white">4+</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-secondary-color dark:bg-dark-bg py-12 sm:py-16 lg:py-20 section-padding">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 container-padding">
+            <div class="text-center mb-8 sm:mb-12 lg:mb-16">
+                <h2 class="text-2xl sm:text-3xl font-bold text-primary-color dark:text-white">Why Choose ExcellenceAI?</h2>
+                <div class="w-20 h-1 bg-ai-600 mx-auto mt-3 sm:mt-4 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 card-grid">
+                <div class="bg-primary-color dark:bg-dark-card p-6 sm:p-8 rounded-2xl shadow-sm hover-card text-center card">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-card-color dark:bg-dark-accent/30 text-ai-600 rounded-full flex items-center justify-center text-xl sm:text-2xl mx-auto mb-4 sm:mb-6"><i class="fa-solid fa-brain"></i></div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-primary-color dark:text-white">Deep Learning</h3>
+                    <p class="text-sm sm:text-base text-muted-color dark:text-secondary-color">Advanced neural networks designed to learn and adapt from complex data structures.</p>
+                </div>
+                <div class="bg-primary-color dark:bg-dark-card p-6 sm:p-8 rounded-2xl shadow-sm hover-card text-center card">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-card-color dark:bg-dark-accent/30 text-ai-400 rounded-full flex items-center justify-center text-xl sm:text-2xl mx-auto mb-4 sm:mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-primary-color dark:text-white">Ethical AI</h3>
+                    <p class="text-sm sm:text-base text-muted-color dark:text-secondary-color">Committed to fairness, transparency, and accountability in every algorithm we build.</p>
+                </div>
+                <div class="bg-primary-color dark:bg-dark-card p-6 sm:p-8 rounded-2xl shadow-sm hover-card text-center card sm:col-span-2 lg:col-span-1">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-card-color dark:bg-dark-accent/30 text-ai-600 rounded-full flex items-center justify-center text-xl sm:text-2xl mx-auto mb-4 sm:mb-6"><i class="fa-solid fa-rocket"></i></div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 text-primary-color dark:text-white">Scalability</h3>
+                    <p class="text-sm sm:text-base text-muted-color dark:text-secondary-color">Solutions that grow with your business, from startup prototype to enterprise deployment.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
