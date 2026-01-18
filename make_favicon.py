@@ -1,7 +1,6 @@
 from PIL import Image
 import json, os
 
-# عدّل اسم اللوجو إذا امتداده مختلف
 LOGO_PATH = os.path.join("assets", "logo.png")
 
 img = Image.open(LOGO_PATH).convert("RGBA")
@@ -17,7 +16,7 @@ save_png(180, "apple-touch-icon.png")
 save_png(192, "android-chrome-192x192.png")
 save_png(512, "android-chrome-512x512.png")
 
-# ICO (يحتوي عدة أحجام داخل ملف واحد)
+# ICO 
 img_16 = img.resize((16, 16), Image.LANCZOS)
 img_32 = img.resize((32, 32), Image.LANCZOS)
 img_48 = img.resize((48, 48), Image.LANCZOS)

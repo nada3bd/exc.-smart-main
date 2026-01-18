@@ -1,0 +1,92 @@
+<section class="mt-14 sm:mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8 sm:mb-10">
+      <h3 class="text-2xl sm:text-3xl font-bold dark:text-white">Our Partners</h3>
+      <p class="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+        Trusted collaborators who help us deliver high-impact AI solutions.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+
+  <button type="button"
+    class="partner-card bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 sm:p-6 flex items-center justify-center text-center w-full"
+    data-name="Platforms Solutions"
+    data-summary="Trusted collaborator delivering high-impact AI solutions across data, automation, and product analytics."
+    data-images='["assets/partners/platforms-1.jpg","assets/partners/platforms-2.jpg","assets/partners/platforms-3.jpg"]'
+  >
+    <span class="text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200">
+      Platforms Solutions
+    </span>
+  </button>
+
+  <button type="button"
+    class="partner-card bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 sm:p-6 flex items-center justify-center text-center w-full"
+    data-name="Partner 02"
+    data-summary="Enterprise consulting and system integrations with a focus on scalable architecture."
+    data-images='["assets/partners/p2-1.jpg","assets/partners/p2-2.jpg"]'
+  >
+    <span class="text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200">Partner 02</span>
+  </button>
+
+  <button type="button"
+    class="partner-card bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 sm:p-6 flex items-center justify-center text-center w-full"
+    data-name="Partner 03"
+    data-summary="AI product studio building MVPs and production-ready ML pipelines."
+    data-images='["assets/partners/p3-1.jpg"]'
+  >
+    <span class="text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200">Partner 03</span>
+  </button>
+
+  <button type="button"
+    class="partner-card bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 sm:p-6 flex items-center justify-center text-center w-full"
+    data-name="Partner 04"
+    data-summary="Cloud & DevOps partner specializing in CI/CD, security, and observability."
+    data-images='["assets/partners/p4-1.jpg","assets/partners/p4-2.jpg"]'
+  >
+    <span class="text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200">Partner 04</span>
+  </button>
+
+  <button type="button"
+    class="partner-card bg-slate-100 dark:bg-slate-800 rounded-2xl p-4 sm:p-6 flex items-center justify-center text-center w-full"
+    data-name="Partner 05"
+    data-summary="Data partner helping teams with dashboards, BI, and analytics enablement."
+    data-images='["assets/partners/p5-1.jpg","assets/partners/p5-2.jpg","assets/partners/p5-3.jpg"]'
+  >
+    <span class="text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200">Partner 05</span>
+  </button>
+
+</div>
+
+<div id="partnerModal" class="fixed inset-0 z-[999] hidden" aria-hidden="true">
+  <div id="partnerOverlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+  <div class="relative min-h-full flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl rounded-2xl bg-white dark:bg-slate-900 shadow-2xl overflow-hidden">
+      <div class="flex items-center justify-between p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800">
+        <h4 id="partnerTitle" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+          Partner
+        </h4>
+
+        <button id="partnerClose"
+          class="rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+          aria-label="Close">
+          ✕
+        </button>
+      </div>
+
+      <div class="p-4 sm:p-6 space-y-4">
+        <p id="partnerSummary" class="text-sm sm:text-base text-slate-600 dark:text-slate-300"></p>
+
+        <div id="partnerGallery" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <style>
+      .partner-card{border:1px solid rgba(2,6,23,0.04);box-shadow:0 6px 18px rgba(2,6,23,0.06);transition:transform .25s ease, box-shadow .25s ease;}
+      .partner-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(2,6,23,0.12);}
+    </style>
+  </div>
+</section>

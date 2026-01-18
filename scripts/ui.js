@@ -1,10 +1,31 @@
-/* FILENAME: scripts/ui.js */
 
 let animId = null;
 
+async function includePartials(root = document) {
+  const targets = Array.from(root.querySelectorAll('[data-include]'));
+  if (!targets.length) return;
+
+  await Promise.all(targets.map(async (el) => {
+    const path = el.getAttribute('data-include');
+    if (!path) return;
+
+    try {
+      const res = await fetch(path);
+      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+      el.innerHTML = await res.text();
+    } catch (e) {
+      console.error('Partial include failed:', path, e);
+      el.innerHTML = `<div class="p-4 rounded-lg bg-red-50 text-red-700">Failed to load: ${path}</div>`;
+    }
+  }));
+}
+
 export function initUI() {
-  // We make this async to wait for components to load
   loadComponents();
+
+  window.addEventListener('page:loaded',  () => includePartials(document));
+
+
 }
 
 async function loadComponents() {
@@ -35,6 +56,7 @@ async function loadComponents() {
   // 3. Now that HTML is injected, attach event listeners
   attachEventListeners();
 
+  includePartials(document);
   // 4. Initialize theme after navbar is loaded
   initThemeAfterLoad();
 
