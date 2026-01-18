@@ -8,13 +8,33 @@ export function initRouter(startCanvasCallback, stopCanvasCallback, startEventsC
     return;
   }
 
-  window.router.navigate = async (pageId) => {
+  // --- Hash Routing Support (works anywhere, even without server rewrites) ---
+  let isUpdatingHash = false;
+
+  const getPageFromHash = () => {
+    const raw = (window.location.hash || "").replace(/^#/, "").trim();
+    return raw || "home";
+  };
+
+  window.router.navigate = async (pageId, options = {}) => {
+    const { updateHash = true, replace = false } = options;
+
+    // Keep URL in sync with the loaded page (so refresh stays on same page)
+    if (updateHash) {
+      const nextHash = `#${pageId}`;
+      if (window.location.hash !== nextHash) {
+        isUpdatingHash = true;
+        if (replace) history.replaceState(null, "", nextHash);
+        else window.location.hash = nextHash;
+        setTimeout(() => (isUpdatingHash = false), 0);
+      }
+    }
+
     // Fade out
     container.style.opacity = "0";
 
     setTimeout(async () => {
       try {
-        // CRITICAL: Requires Local Server (e.g. Live Server)
         const response = await fetch(`pages/${pageId}.html`);
         if (!response.ok) throw new Error("Page not found");
         const html = await response.text();
@@ -27,8 +47,6 @@ export function initRouter(startCanvasCallback, stopCanvasCallback, startEventsC
 
         // Handle page-specific initialization
         if (pageId === "team") {
-          // Dynamically import and initialize team page
-          // Use requestAnimationFrame to ensure DOM is ready
           import('./team.js').then(module => {
             requestAnimationFrame(() => {
               requestAnimationFrame(() => {
@@ -42,19 +60,16 @@ export function initRouter(startCanvasCallback, stopCanvasCallback, startEventsC
         if (pageId === "home") {
           stopEventsCanvasCallback();
           startCanvasCallback();
-          // Reset min-height for home page
           container.style.minHeight = '';
           container.style.height = '';
         } else if (pageId === "events") {
           stopCanvasCallback();
           startEventsCanvasCallback();
-          // Remove min-height constraint for events page to prevent extra white space
           container.style.minHeight = 'auto';
           container.style.height = 'auto';
         } else {
           stopCanvasCallback();
           stopEventsCanvasCallback();
-          // Reset min-height for other pages
           container.style.minHeight = '';
           container.style.height = '';
         }
@@ -66,12 +81,23 @@ export function initRouter(startCanvasCallback, stopCanvasCallback, startEventsC
         }, 50);
       } catch (err) {
         console.error("Error loading page:", err);
-        container.innerHTML = `<div class="p-10 text-center text-red-500">Error loading ${pageId}.html.<br><br><small>Are you running this on a local server? (e.g. VS Code Live Server)</small></div>`;
+        container.innerHTML = `<div class="p-10 text-center text-red-500">Error loading ${pageId}.html.</div>`;
         container.style.opacity = "1";
       }
     }, 300);
   };
 
-  // Load home page by default
-  window.router.navigate("home");
+  // Back/forward + direct hash links
+  window.addEventListener("hashchange", () => {
+    if (isUpdatingHash) return;
+    const pageId = getPageFromHash();
+    window.router.navigate(pageId, { updateHash: false });
+  });
+
+  // Initial load from hash (so refresh stays on same page)
+  const initialPage = getPageFromHash();
+  if (!window.location.hash) {
+    history.replaceState(null, "", `#${initialPage}`);
+  }
+  window.router.navigate(initialPage, { updateHash: false, replace: true });
 }
