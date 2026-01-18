@@ -71,7 +71,6 @@ async function loadComponents() {
 }
 
 function attachEventListeners() {
-  // Mobile Menu
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
 
@@ -83,7 +82,6 @@ function attachEventListeners() {
     btn.addEventListener("click", window.ui.toggleMobileMenu);
   }
 
-  // Modal content definitions (shared across all instances)
   const MODAL_CONTENT = {
     workflow: {
       title: 'AI Workflow Automation Tools',
@@ -271,6 +269,70 @@ function attachEventListeners() {
       openLearnMoreModal(id);
     }
   });
+  // Partners Modal (event delegation - works with injected partials)
+function openPartnerModalFromCard(card) {
+  const modal = document.getElementById('partnerModal');
+  if (!modal) return;
+
+  const titleEl = document.getElementById('partnerTitle');
+  const summaryEl = document.getElementById('partnerSummary');
+  const galleryEl = document.getElementById('partnerGallery');
+
+  const name = card.dataset.name || 'Partner';
+  const summary = card.dataset.summary || '';
+  let images = [];
+
+  try {
+    images = card.dataset.images ? JSON.parse(card.dataset.images) : [];
+  } catch (e) {
+    images = [];
+  }
+
+  if (titleEl) titleEl.textContent = name;
+  if (summaryEl) summaryEl.textContent = summary;
+
+  if (galleryEl) {
+    galleryEl.innerHTML = images.map(src => `
+      <img src="${src}" alt="${name}" class="w-full h-28 sm:h-32 object-cover rounded-xl border border-slate-200 dark:border-slate-800">
+    `).join('');
+  }
+
+  modal.classList.remove('hidden');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePartnerModal() {
+  const modal = document.getElementById('partnerModal');
+  if (!modal) return;
+  modal.classList.add('hidden');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('click', (e) => {
+  // open
+  const card = e.target.closest('.partner-card');
+  if (card) {
+    e.preventDefault();
+    openPartnerModalFromCard(card);
+    return;
+  }
+
+  // close (overlay or close button)
+  if (e.target.closest('#partnerOverlay') || e.target.closest('#partnerClose')) {
+    e.preventDefault();
+    closePartnerModal();
+  }
+});
+
+// close on Escape (attach once)
+if (!window._partnerEscapeAttached) {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePartnerModal();
+  });
+  window._partnerEscapeAttached = true;
+}
 
   // Learn More Modal Setup - runs on initial load and after router page injections
   async function setupLearnMoreModal() {
